@@ -9,8 +9,8 @@ type StoreContextValue = {
   cart: CartItem[];
   wishlist: string[];
   addToCart: (product: Product, quantity?: number, selectedSize?: string) => void;
-  removeFromCart: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void;
+  removeFromCart: (id: string, selectedSize?: string) => void;
+  updateQuantity: (id: string, quantity: number, selectedSize?: string) => void;
   toggleWishlist: (id: string) => void;
   isWishlisted: (id: string) => boolean;
   cartCount: number;
@@ -18,9 +18,11 @@ type StoreContextValue = {
 };
 
 const StoreContext = createContext<StoreContextValue | null>(null);
-
 const CART_KEY = 'aurelia-cart';
 const WISHLIST_KEY = 'aurelia-wishlist';
+
+const sameItem = (item: CartItem, id: string, selectedSize?: string) =>
+  item.id === id && item.selectedSize === selectedSize;
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -35,25 +37,18 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   }, []);
 
-  useEffect(() => {
-    window.localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  }, [cart]);
-
-  useEffect(() => {
-    window.localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
-  }, [wishlist]);
+  useEffect(() => { window.localStorage.setItem(CART_KEY, JSON.stringify(cart)); }, [cart]);
+  useEffect(() => { window.localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist)); }, [wishlist]);
 
   const value = useMemo<StoreContextValue>(() => ({
     cart,
     wishlist,
     addToCart: (product, quantity = 1, selectedSize) => {
       setCart((current) => {
-        const existing = current.find(
-          (item) => item.id === product.id && item.selectedSize === selectedSize,
-        );
+        const existing = current.find((item) => sameItem(item, product.id, selectedSize));
         if (existing) {
           return current.map((item) =>
-            item.id === product.id && item.selectedSize === selectedSize
+            sameItem(item, product.id, selectedSize)
               ? { ...item, quantity: item.quantity + quantity }
               : item,
           );
@@ -61,11 +56,12 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
         return [...current, { ...product, quantity, selectedSize }];
       });
     },
-    removeFromCart: (id) => setCart((current) => current.filter((item) => item.id !== id)),
-    updateQuantity: (id, quantity) =>
+    removeFromCart: (id, selectedSize) =>
+      setCart((current) => current.filter((item) => !sameItem(item, id, selectedSize))),
+    updateQuantity: (id, quantity, selectedSize) =>
       setCart((current) =>
         current
-          .map((item) => (item.id === id ? { ...item, quantity } : item))
+          .map((item) => (sameItem(item, id, selectedSize) ? { ...item, quantity } : item))
           .filter((item) => item.quantity > 0),
       ),
     toggleWishlist: (id) =>

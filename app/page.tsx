@@ -24,6 +24,36 @@ const socialImages = [
 export default function Home() {
   return (
     <main>
+      <section className="relative z-10 bg-[#FBF9F5] border-b border-line overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-5 md:py-7">
+          <div className="flex gap-5 md:gap-8 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-1">
+            {categories.map((x, i) => (
+              <Link
+                key={x.name}
+                href={`/collections/${x.name.toLowerCase().replaceAll(' ', '-')}`}
+                className="group shrink-0 snap-start w-[76px] md:w-[104px] flex flex-col items-center gap-2.5"
+              >
+                <span
+                  className="relative block w-[68px] h-[68px] md:w-[92px] md:h-[92px] rounded-full p-[2px] bg-gradient-to-br from-[#B89B5E] via-[#F3EFE8] to-[#8F743F] shadow-[0_6px_22px_rgba(23,23,23,.10)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_10px_30px_rgba(184,155,94,.25)] hepra-category-float"
+                  style={{ animationDelay: `${i * 0.18}s` }}
+                >
+                  <span className="block w-full h-full rounded-full overflow-hidden bg-[#F3EFE8]">
+                    <img
+                      src={`https://images.unsplash.com/${x.image}?auto=format&fit=crop&w=220&h=220&q=88`}
+                      alt={x.name}
+                      className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+                    />
+                  </span>
+                </span>
+                <span className="text-[9px] md:text-[10px] uppercase tracking-[.12em] text-center whitespace-nowrap group-hover:text-gold transition">
+                  {x.name}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="relative min-h-[76svh] md:aspect-[1920/700] md:min-h-0 overflow-hidden bg-[#1b1917]">
         <Image
           src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1080&h=1350&q=92"
@@ -65,36 +95,6 @@ export default function Home() {
         </div>
         <div className="absolute right-7 bottom-7 text-white/75 hidden md:flex items-center gap-2 text-[9px] tracking-[.2em]">
           SCROLL <ArrowDown size={14} />
-        </div>
-      </section>
-
-      <section className="relative z-10 bg-[#FBF9F5] border-b border-line overflow-hidden">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-5 md:py-7">
-          <div className="flex gap-5 md:gap-8 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-1">
-            {categories.map((x, i) => (
-              <Link
-                key={x.name}
-                href={`/collections/${x.name.toLowerCase().replaceAll(' ', '-')}`}
-                className="group shrink-0 snap-start w-[76px] md:w-[104px] flex flex-col items-center gap-2.5"
-              >
-                <span
-                  className="relative block w-[68px] h-[68px] md:w-[92px] md:h-[92px] rounded-full p-[2px] bg-gradient-to-br from-[#B89B5E] via-[#F3EFE8] to-[#8F743F] shadow-[0_6px_22px_rgba(23,23,23,.10)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_10px_30px_rgba(184,155,94,.25)] hepra-category-float"
-                  style={{ animationDelay: `${i * 0.18}s` }}
-                >
-                  <span className="block w-full h-full rounded-full overflow-hidden bg-[#F3EFE8]">
-                    <img
-                      src={`https://images.unsplash.com/${x.image}?auto=format&fit=crop&w=220&h=220&q=88`}
-                      alt={x.name}
-                      className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
-                    />
-                  </span>
-                </span>
-                <span className="text-[9px] md:text-[10px] uppercase tracking-[.12em] text-center whitespace-nowrap group-hover:text-gold transition">
-                  {x.name}
-                </span>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 

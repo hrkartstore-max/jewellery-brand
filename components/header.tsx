@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Search, UserRound, Heart, ShoppingBag, Menu, X, Minus, Plus, Trash2, ArrowRight } from 'lucide-react';
 import { useStore } from '@/components/store-provider';
@@ -113,7 +114,7 @@ export function Header() {
                   {cart.map((item) => (
                     <div key={`${item.id}-${item.selectedSize ?? 'default'}`} className="flex gap-4">
                       <Link href={`/products/${item.slug}`} onClick={() => setCartOpen(false)} className="relative w-24 h-28 shrink-0 bg-sand overflow-hidden">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                        <Image src={item.image} alt={item.name} fill sizes="96px" className="object-cover" />
                       </Link>
                       <div className="min-w-0 flex-1">
                         <div className="flex justify-between gap-3">
@@ -121,14 +122,14 @@ export function Header() {
                             <p className="text-[9px] uppercase tracking-[.16em] text-black/40">{item.category}</p>
                             <h3 className="font-display text-lg leading-tight mt-1">{item.name}</h3>
                           </div>
-                          <button onClick={() => removeFromCart(item.id)} aria-label={`Remove ${item.name}`} className="text-black/35 hover:text-black"><Trash2 size={15} /></button>
+                          <button onClick={() => removeFromCart(item.id, item.selectedSize)} aria-label={`Remove ${item.name}`} className="text-black/35 hover:text-black"><Trash2 size={15} /></button>
                         </div>
                         <div className="text-sm mt-2">{money(item.price)}</div>
                         {item.selectedSize && <div className="text-[10px] text-black/45 mt-1">Size: {item.selectedSize}</div>}
                         <div className="inline-flex items-center border border-line mt-3">
-                          <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="w-8 h-8 grid place-items-center" aria-label="Decrease quantity"><Minus size={13} /></button>
+                          <button onClick={() => updateQuantity(item.id, item.quantity - 1, item.selectedSize)} className="w-8 h-8 grid place-items-center" aria-label="Decrease quantity"><Minus size={13} /></button>
                           <span className="w-8 text-center text-xs">{item.quantity}</span>
-                          <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="w-8 h-8 grid place-items-center" aria-label="Increase quantity"><Plus size={13} /></button>
+                          <button onClick={() => updateQuantity(item.id, item.quantity + 1, item.selectedSize)} className="w-8 h-8 grid place-items-center" aria-label="Increase quantity"><Plus size={13} /></button>
                         </div>
                       </div>
                     </div>

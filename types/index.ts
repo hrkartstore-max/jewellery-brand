@@ -1,0 +1,1 @@
+export type Product={id:string;slug:string;name:string;category:string;price:number;compareAt?:number;image:string;hoverImage:string;badge?:string;rating:number;reviews:number;material:string;description:string;sizes?:string[]};

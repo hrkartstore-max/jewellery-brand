@@ -1,2 +1,46 @@
-'use client';import {useState} from 'react';import Image from 'next/image';import Link from 'next/link';import {Heart,Plus} from 'lucide-react';import {Product} from '@/types';import {money,discount} from '@/lib/format';
-export function ProductCard({p}:{p:Product}){const[w,setW]=useState(false);return <article className="group min-w-0"><div className="relative aspect-[4/5] overflow-hidden bg-sand"><Link href={`/products/${p.slug}`}><Image src={p.image} alt={p.name} fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover transition duration-700 group-hover:scale-[1.035]"/><Image src={p.hoverImage} alt="" fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover opacity-0 group-hover:opacity-100 transition duration-700"/></Link>{p.badge&&<span className="absolute left-3 top-3 bg-white/90 px-2.5 py-1 text-[9px] tracking-[.16em]">{p.badge}</span>}<button onClick={()=>setW(!w)} aria-label="Wishlist" className="absolute right-3 top-3 w-9 h-9 bg-white/90 rounded-full grid place-items-center"><Heart size={16} fill={w?'currentColor':'none'} /></button><button className="absolute bottom-3 left-3 right-3 h-10 bg-white/95 text-[10px] tracking-[.16em] uppercase opacity-100 md:opacity-0 md:group-hover:opacity-100 transition flex items-center justify-center gap-2"><Plus size={15}/> Quick Add</button></div><Link href={`/products/${p.slug}`} className="block pt-4"><div className="text-[9px] uppercase tracking-[.18em] text-black/45">{p.category}</div><h3 className="font-display text-lg mt-1">{p.name}</h3><div className="flex items-center gap-2 mt-2 text-sm"><span>{money(p.price)}</span>{p.compareAt&&<><del className="text-black/35">{money(p.compareAt)}</del><span className="text-gold text-xs">{discount(p.price,p.compareAt)}% off</span></>}</div></Link></article>}
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { Heart, Plus, Check } from 'lucide-react';
+import { Product } from '@/types';
+import { money, discount } from '@/lib/format';
+import { useStore } from '@/components/store-provider';
+
+export function ProductCard({ p }: { p: Product }) {
+  const { addToCart, toggleWishlist, isWishlisted } = useStore();
+  const wishlisted = isWishlisted(p.id);
+
+  return (
+    <article className="group min-w-0">
+      <div className="relative aspect-[4/5] overflow-hidden bg-sand">
+        <Link href={`/products/${p.slug}`}>
+          <Image src={p.image} alt={p.name} fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" />
+          <Image src={p.hoverImage} alt="" fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover opacity-0 group-hover:opacity-100 transition duration-700" />
+        </Link>
+        {p.badge && <span className="absolute left-3 top-3 bg-white/90 px-2.5 py-1 text-[9px] tracking-[.16em]">{p.badge}</span>}
+        <button
+          onClick={() => toggleWishlist(p.id)}
+          aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+          className="absolute right-3 top-3 w-9 h-9 bg-white/90 rounded-full grid place-items-center"
+        >
+          <Heart size={16} fill={wishlisted ? 'currentColor' : 'none'} />
+        </button>
+        <button
+          onClick={() => addToCart(p)}
+          className="absolute bottom-3 left-3 right-3 h-10 bg-white/95 text-[10px] tracking-[.16em] uppercase opacity-100 md:opacity-0 md:group-hover:opacity-100 transition flex items-center justify-center gap-2"
+        >
+          <Plus size={15} /> Quick Add
+        </button>
+      </div>
+      <Link href={`/products/${p.slug}`} className="block pt-4">
+        <div className="text-[9px] uppercase tracking-[.18em] text-black/45">{p.category}</div>
+        <h3 className="font-display text-lg mt-1">{p.name}</h3>
+        <div className="flex items-center gap-2 mt-2 text-sm">
+          <span>{money(p.price)}</span>
+          {p.compareAt && <><del className="text-black/35">{money(p.compareAt)}</del><span className="text-gold text-xs">{discount(p.price, p.compareAt)}% off</span></>}
+        </div>
+      </Link>
+    </article>
+  );
+}

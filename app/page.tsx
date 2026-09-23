@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { ProductSection, EditorialCategories } from '@/components/section';
+import { HeroSlider } from '@/components/hero-slider';
 
 const categories = [
   { name: 'Rings', image: 'photo-1605100804763-247f67b3557e' },
@@ -57,49 +58,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative min-h-[76svh] md:aspect-[1920/700] md:min-h-0 overflow-hidden bg-[#1b1917]">
-        <Image
-          src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1080&h=1350&q=92"
-          alt="HEPRA Jewellery gold collection"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[58%_center] md:hidden"
-        />
-        <Image
-          src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1920&h=700&q=92"
-          alt="HEPRA Jewellery editorial collection"
-          fill
-          priority
-          sizes="100vw"
-          className="hidden object-cover object-center md:block"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
-        <div className="relative min-h-[76svh] md:aspect-[1920/700] md:min-h-0 max-w-[1440px] mx-auto px-5 md:px-12 flex items-end pb-10 sm:pb-14 md:pb-20">
-          <div className="text-white max-w-3xl">
-            <div className="flex items-center gap-3 text-[9px] sm:text-[10px] tracking-[.28em] uppercase mb-5 text-white/75">
-              <span>HEPRA JEWELLERY</span><span className="w-8 h-px bg-white/40" /><span>2026</span>
-            </div>
-            <h1 className="font-display text-[2.75rem] sm:text-6xl md:text-8xl leading-[.92] tracking-tight max-w-4xl">
-              JEWELLERY THAT TELLS YOUR STORY
-            </h1>
-            <p className="mt-5 md:mt-6 text-sm md:text-base text-white/80 max-w-lg">
-              Timeless pieces designed to celebrate every moment.
-            </p>
-            <div className="grid grid-cols-1 sm:flex gap-2.5 mt-7 md:mt-8">
-              <Link href="/shop" className="bg-white text-black px-7 py-4 text-[10px] tracking-[.18em] text-center hover:bg-gold hover:text-white transition">
-                SHOP COLLECTION
-              </Link>
-              <Link href="/shop" className="border border-white/60 bg-black/10 backdrop-blur-sm px-7 py-4 text-[10px] tracking-[.18em] text-center hover:bg-white hover:text-black transition">
-                EXPLORE NEW ARRIVALS
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="absolute right-7 bottom-7 text-white/75 hidden md:flex items-center gap-2 text-[9px] tracking-[.2em]">
-          SCROLL <ArrowDown size={14} />
-        </div>
-      </section>
+      <HeroSlider />
 
       <ProductSection title="NEW ARRIVALS" subtitle="Discover the latest expressions of modern jewellery." />
       <EditorialCategories />

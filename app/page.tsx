@@ -3,7 +3,15 @@ import Link from 'next/link';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { ProductSection, EditorialCategories } from '@/components/section';
 
-const categories = ['Rings', 'Earrings', 'Necklaces', 'Bracelets', 'Pendants', 'Chains', 'Jewellery Sets'];
+const categories = [
+  { name: 'Rings', image: 'photo-1605100804763-247f67b3557e' },
+  { name: 'Earrings', image: 'photo-1535632787350-4e68ef0ac584' },
+  { name: 'Necklaces', image: 'photo-1515562141207-7a88fb7ce338' },
+  { name: 'Bracelets', image: 'photo-1611652022419-a9419f74343d' },
+  { name: 'Pendants', image: 'photo-1599643477877-530eb83abc8e' },
+  { name: 'Chains', image: 'photo-1599643478518-a784e5dc4c8f' },
+  { name: 'Jewellery Sets', image: 'photo-1515562141207-7a88fb7ce338' },
+];
 const socialImages = [
   'photo-1515562141207-7a88fb7ce338',
   'photo-1599643477877-530eb83abc8e',
@@ -60,17 +68,33 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-b border-line bg-sand">
-        <div className="max-w-[1440px] mx-auto px-5 md:px-8 py-6 md:py-7 flex gap-7 md:gap-8 overflow-x-auto hide-scrollbar">
-          {categories.map((x) => (
-            <Link
-              key={x}
-              href={`/collections/${x.toLowerCase().replaceAll(' ', '-')}`}
-              className="shrink-0 flex items-center gap-3 text-[11px] uppercase tracking-[.14em] hover:text-gold transition"
-            >
-              <span className="w-2 h-2 rounded-full bg-gold" />{x}
-            </Link>
-          ))}
+      <section className="relative z-10 bg-[#FBF9F5] border-b border-line overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-5 md:py-7">
+          <div className="flex gap-5 md:gap-8 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-1">
+            {categories.map((x, i) => (
+              <Link
+                key={x.name}
+                href={`/collections/${x.name.toLowerCase().replaceAll(' ', '-')}`}
+                className="group shrink-0 snap-start w-[76px] md:w-[104px] flex flex-col items-center gap-2.5"
+              >
+                <span
+                  className="relative block w-[68px] h-[68px] md:w-[92px] md:h-[92px] rounded-full p-[2px] bg-gradient-to-br from-[#B89B5E] via-[#F3EFE8] to-[#8F743F] shadow-[0_6px_22px_rgba(23,23,23,.10)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_10px_30px_rgba(184,155,94,.25)] hepra-category-float"
+                  style={{ animationDelay: \`\${i * 0.18}s\` }}
+                >
+                  <span className="block w-full h-full rounded-full overflow-hidden bg-[#F3EFE8]">
+                    <img
+                      src={`https://images.unsplash.com/${x.image}?auto=format&fit=crop&w=220&h=220&q=88`}
+                      alt={x.name}
+                      className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+                    />
+                  </span>
+                </span>
+                <span className="text-[9px] md:text-[10px] uppercase tracking-[.12em] text-center whitespace-nowrap group-hover:text-gold transition">
+                  {x.name}
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

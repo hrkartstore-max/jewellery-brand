@@ -1,0 +1,3 @@
+import './globals.css';import {Header} from '@/components/header';import {Footer} from '@/components/footer';
+export const metadata={title:'AURELIA — Jewellery That Tells Your Story',description:'Timeless jewellery designed to celebrate every moment.',metadataBase:new URL('https://aurelia-jewellery.vercel.app'),openGraph:{title:'AURELIA Jewellery',description:'Timeless pieces designed to celebrate every moment.',type:'website'}};
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body><Header/>{children}<Footer/></body></html>}

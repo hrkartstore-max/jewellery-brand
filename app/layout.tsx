@@ -4,12 +4,12 @@ import { Footer } from '@/components/footer';
 import { StoreProvider } from '@/components/store-provider';
 
 export const metadata = {
-  title: 'AURELIA — Jewellery That Tells Your Story',
-  description: 'Timeless jewellery designed to celebrate every moment.',
+  title: 'HEPRA Jewellery — Jewellery That Tells Your Story',
+  description: 'HEPRA Jewellery creates timeless pieces designed to celebrate every moment.',
   metadataBase: new URL('https://jewellery-brand-4ajl-p6uueg39h-hepra1.vercel.app'),
   openGraph: {
-    title: 'AURELIA Jewellery',
-    description: 'Timeless pieces designed to celebrate every moment.',
+    title: 'HEPRA Jewellery',
+    description: 'Timeless jewellery designed to celebrate every moment.',
     type: 'website',
   },
 };

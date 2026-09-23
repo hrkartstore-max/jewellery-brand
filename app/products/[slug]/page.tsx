@@ -14,7 +14,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!p) notFound();
 
   return (
-    <main className="max-w-[1440px] mx-auto px-5 md:px-8 py-8">
+    <main className="max-w-[1440px] mx-auto px-5 md:px-8 py-8 pb-28 md:pb-8">
       <div className="text-[10px] uppercase tracking-[.18em] text-black/40 mb-8">
         HOME / {p.category.toUpperCase()} / {p.name.toUpperCase()}
       </div>
@@ -32,7 +32,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
 
         <div className="lg:pt-8">
-          <div className="text-[10px] uppercase tracking-[.2em] text-gold">{p.category} · AURELIA</div>
+          <div className="text-[10px] uppercase tracking-[.2em] text-gold">{p.category} · HEPRA JEWELLERY</div>
           <h1 className="font-display text-5xl md:text-6xl mt-3">{p.name}</h1>
           <div className="flex gap-3 items-center mt-5 text-sm">
             <span aria-label={`${p.rating} out of 5 stars`}>★★★★★</span>

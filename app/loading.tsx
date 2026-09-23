@@ -1,0 +1,1 @@
+export default function Loading(){return <main className="max-w-[1440px] mx-auto px-5 md:px-8 py-16 animate-pulse"><div className="h-5 w-32 bg-sand"/><div className="h-14 w-2/3 bg-sand mt-6"/><div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-12">{Array.from({length:8}).map((_,i)=><div className="aspect-[4/5] bg-sand" key={i}/>)}</div></main>}

@@ -24,8 +24,11 @@ const socialImages = [
 export default function Home() {
   return (
     <main>
-      <section className="relative z-10 bg-[#FBF9F5] border-b border-line overflow-hidden">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-5 md:py-7">
+      <section className="relative z-10 bg-[#FBF9F5] border-b border-line overflow-hidden shadow-[0_8px_30px_rgba(23,23,23,.06)]">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-4 md:py-6">
+          <div className="text-center mb-3 md:mb-4">
+            <span className="text-[8px] md:text-[9px] tracking-[.3em] text-[#B89B5E] uppercase">Shop by Category</span>
+          </div>
           <div className="flex gap-5 md:gap-8 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-1">
             {categories.map((x, i) => (
               <Link

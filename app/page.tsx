@@ -16,7 +16,7 @@ const socialImages = [
 export default function Home() {
   return (
     <main>
-      <section className="relative min-h-[76svh] md:min-h-[calc(100svh-116px)] overflow-hidden bg-[#1b1917]">
+      <section className="relative min-h-[76svh] md:aspect-[1920/700] md:min-h-0 overflow-hidden bg-[#1b1917]">
         <Image
           src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1080&h=1350&q=92"
           alt="HEPRA Jewellery gold collection"
@@ -34,7 +34,7 @@ export default function Home() {
           className="hidden object-cover object-center md:block"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
-        <div className="relative min-h-[76svh] md:min-h-[calc(100svh-116px)] max-w-[1440px] mx-auto px-5 md:px-12 flex items-end pb-10 sm:pb-14 md:pb-20">
+        <div className="relative min-h-[76svh] md:aspect-[1920/700] md:min-h-0 max-w-[1440px] mx-auto px-5 md:px-12 flex items-end pb-10 sm:pb-14 md:pb-20">
           <div className="text-white max-w-3xl">
             <div className="flex items-center gap-3 text-[9px] sm:text-[10px] tracking-[.28em] uppercase mb-5 text-white/75">
               <span>HEPRA JEWELLERY</span><span className="w-8 h-px bg-white/40" /><span>2026</span>

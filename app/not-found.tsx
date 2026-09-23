@@ -1,1 +1,21 @@
-import Link from 'next/link';export default function NotFound(){return <main className="min-h-[60vh] grid place-items-center px-5 text-center"><div><div className="text-[10px] tracking-[.2em] text-gold">404</div><h1 className="font-display text-6xl mt-3">A little lost.</h1><p className="text-black/50 mt-4">The page you're looking for has moved.</p><Link href="/" className="inline-block mt-7 bg-luxury text-white px-8 py-4 text-[10px] tracking-[.18em]">BACK HOME</Link></div></main>
+import Link from 'next/link';
+
+export default function NotFound() {
+  return (
+    <main className="min-h-[60vh] grid place-items-center px-5 text-center">
+      <div>
+        <div className="text-[10px] tracking-[.2em] text-gold">404</div>
+        <h1 className="font-display text-6xl mt-3">A little lost.</h1>
+        <p className="text-black/50 mt-4">
+          The page you&apos;re looking for has moved.
+        </p>
+        <Link
+          href="/"
+          className="inline-block mt-7 bg-luxury text-white px-8 py-4 text-[10px] tracking-[.18em]"
+        >
+          BACK HOME
+        </Link>
+      </div>
+    </main>
+  );
+}

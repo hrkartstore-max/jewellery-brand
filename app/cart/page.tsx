@@ -53,7 +53,7 @@ export default function Cart() {
           <div className="flex justify-between mt-7 text-sm"><span>Subtotal</span><span>{money(cartTotal)}</span></div>
           <div className="flex justify-between mt-3 text-sm text-black/50"><span>Shipping</span><span>{cartTotal >= 2999 ? 'Complimentary' : 'Calculated at checkout'}</span></div>
           <div className="border-t border-black/10 mt-6 pt-6 flex justify-between font-medium"><span>Total</span><span>{money(cartTotal)}</span></div>
-          <button className="w-full mt-7 h-14 bg-luxury text-white text-[10px] tracking-[.2em]">PROCEED TO CHECKOUT</button>
+          <Link href="/checkout" className="w-full mt-7 h-14 bg-luxury text-white text-[10px] tracking-[.2em] flex items-center justify-center">PROCEED TO CHECKOUT</Link>
           <p className="text-[11px] text-black/45 text-center mt-4">Secure checkout · Easy returns · Authentic jewellery</p>
         </aside>
       </div>

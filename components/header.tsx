@@ -1,3 +1,75 @@
-'use client';import {useState} from 'react';import Link from 'next/link';import {Search,UserRound,Heart,ShoppingBag,Menu,X} from 'lucide-react';
-const nav=[['New Arrivals','/shop'],['Jewellery','/shop'],['Rings','/collections/rings'],['Earrings','/collections/earrings'],['Necklaces','/collections/necklaces'],['Bracelets','/collections/bracelets'],['Collections','/shop']];
-export function Header(){const[open,setOpen]=useState(false);return <><div className="bg-luxury text-white text-[10px] tracking-[.22em] uppercase text-center py-2.5">Complimentary Shipping on Orders Above ₹2,999</div><header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-line"><div className="max-w-[1440px] mx-auto px-5 md:px-8 h-20 flex items-center justify-between"><button className="md:hidden" aria-label="Open menu" onClick={()=>setOpen(true)}><Menu size={22}/></button><Link href="/" className="font-display text-2xl md:text-3xl tracking-[.22em]">AURELIA</Link><nav className="hidden lg:flex items-center gap-7 text-[11px] uppercase tracking-[.14em]">{nav.map(([n,h])=><Link key={n} href={h} className="hover:text-gold transition">{n}</Link>)}</nav><div className="flex items-center gap-4"><Link href="/search" aria-label="Search"><Search size={19}/></Link><Link href="/account" className="hidden md:block" aria-label="Account"><UserRound size={19}/></Link><Link href="/wishlist" className="hidden md:block" aria-label="Wishlist"><Heart size={19}/></Link><Link href="/cart" aria-label="Cart"><ShoppingBag size={19}/></Link></div></div></header>{open&&<div className="fixed inset-0 z-50 bg-cream lg:hidden"><div className="p-5 flex justify-between items-center border-b border-line"><span className="font-display text-2xl tracking-[.18em]">AURELIA</span><button onClick={()=>setOpen(false)} aria-label="Close menu"><X/></button></div><nav className="p-7 flex flex-col gap-6 font-display text-3xl">{nav.map(([n,h])=><Link key={n} href={h} onClick={()=>setOpen(false)}>{n}</Link>)}<div className="h-px bg-line"/><Link href="/journal" className="text-xl">Journal</Link><Link href="/size-guide" className="text-xl">Size Guide</Link><Link href="/contact" className="text-xl">Contact</Link></nav></div>}</>}
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { Search, UserRound, Heart, ShoppingBag, Menu, X } from 'lucide-react';
+import { useStore } from '@/components/store-provider';
+
+const nav = [
+  ['New Arrivals', '/shop'],
+  ['Jewellery', '/shop'],
+  ['Rings', '/collections/rings'],
+  ['Earrings', '/collections/earrings'],
+  ['Necklaces', '/collections/necklaces'],
+  ['Bracelets', '/collections/bracelets'],
+  ['Collections', '/shop'],
+];
+
+export function Header() {
+  const [open, setOpen] = useState(false);
+  const { cartCount, wishlist } = useStore();
+
+  return (
+    <>
+      <div className="bg-luxury text-white text-[10px] tracking-[.22em] uppercase text-center py-2.5">
+        Complimentary Shipping on Orders Above ₹2,999
+      </div>
+      <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-line">
+        <div className="max-w-[1440px] mx-auto px-5 md:px-8 h-20 flex items-center justify-between">
+          <button className="md:hidden" aria-label="Open menu" onClick={() => setOpen(true)}>
+            <Menu size={22} />
+          </button>
+          <Link href="/" className="font-display text-2xl md:text-3xl tracking-[.22em]">
+            AURELIA
+          </Link>
+          <nav className="hidden lg:flex items-center gap-7 text-[11px] uppercase tracking-[.14em]">
+            {nav.map(([name, href]) => (
+              <Link key={name} href={href} className="hover:text-gold transition">
+                {name}
+              </Link>
+            ))}
+          </nav>
+          <div className="flex items-center gap-4">
+            <Link href="/search" aria-label="Search"><Search size={19} /></Link>
+            <Link href="/account" className="hidden md:block" aria-label="Account"><UserRound size={19} /></Link>
+            <Link href="/wishlist" className="hidden md:block relative" aria-label="Wishlist">
+              <Heart size={19} />
+              {wishlist.length > 0 && <span className="absolute -right-2 -top-2 text-[8px] min-w-4 h-4 px-1 rounded-full bg-gold text-white grid place-items-center">{wishlist.length}</span>}
+            </Link>
+            <Link href="/cart" className="relative" aria-label="Cart">
+              <ShoppingBag size={19} />
+              {cartCount > 0 && <span className="absolute -right-2 -top-2 text-[8px] min-w-4 h-4 px-1 rounded-full bg-luxury text-white grid place-items-center">{cartCount}</span>}
+            </Link>
+          </div>
+        </div>
+      </header>
+      {open && (
+        <div className="fixed inset-0 z-50 bg-cream lg:hidden">
+          <div className="p-5 flex justify-between items-center border-b border-line">
+            <span className="font-display text-2xl tracking-[.18em]">AURELIA</span>
+            <button onClick={() => setOpen(false)} aria-label="Close menu"><X /></button>
+          </div>
+          <nav className="p-7 flex flex-col gap-6 font-display text-3xl">
+            {nav.map(([name, href]) => (
+              <Link key={name} href={href} onClick={() => setOpen(false)}>{name}</Link>
+            ))}
+            <div className="h-px bg-line" />
+            <Link href="/journal" className="text-xl" onClick={() => setOpen(false)}>Journal</Link>
+            <Link href="/size-guide" className="text-xl" onClick={() => setOpen(false)}>Size Guide</Link>
+            <Link href="/contact" className="text-xl" onClick={() => setOpen(false)}>Contact</Link>
+          </nav>
+        </div>
+      )}
+    </>
+  );
+}

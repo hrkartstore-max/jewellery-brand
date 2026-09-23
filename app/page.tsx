@@ -26,7 +26,7 @@ export default function Home() {
           className="object-cover object-[58%_center] md:hidden"
         />
         <Image
-          src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=2200&h=900&q=92"
+          src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1920&h=700&q=92"
           alt="HEPRA Jewellery editorial collection"
           fill
           priority

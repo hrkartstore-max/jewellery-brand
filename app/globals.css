@@ -33,3 +33,15 @@ button { cursor: pointer; }
   input, button { font-size: 16px; }
   input[type='email'] { font-size: 16px; }
 }
+
+.hepra-category-float {
+  animation: hepraCategoryFloat 3.8s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes hepraCategoryFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hepra-category-float { animation: none; }
+}

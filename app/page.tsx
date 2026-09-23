@@ -79,7 +79,7 @@ export default function Home() {
               >
                 <span
                   className="relative block w-[68px] h-[68px] md:w-[92px] md:h-[92px] rounded-full p-[2px] bg-gradient-to-br from-[#B89B5E] via-[#F3EFE8] to-[#8F743F] shadow-[0_6px_22px_rgba(23,23,23,.10)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_10px_30px_rgba(184,155,94,.25)] hepra-category-float"
-                  style={{ animationDelay: \`\${i * 0.18}s\` }}
+                  style={{ animationDelay: `${i * 0.18}s` }}
                 >
                   <span className="block w-full h-full rounded-full overflow-hidden bg-[#F3EFE8]">
                     <img
